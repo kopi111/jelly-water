@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Jelly Water · Cool Jamaican Coconut Water</title>
+  <meta name="description" content="Jelly Water — 100% pure Jamaican coconut water from Nature Fresh. Order by WhatsApp or call (876) 464-4762.">
+
+  <!-- Fonts: Bricolage Grotesque for the big headlines, Poppins to match the bottle label -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/site.css?v=3">
+
+  <!-- Tells the browser where to load the Three.js 3D library from -->
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+        "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+      }
+    }
+  </script>
+</head>
+<body>
+  <!-- The 3D bottle is drawn on this canvas. It sits fixed behind the page and follows you as you scroll. -->
+  <canvas id="bottle-canvas" aria-hidden="true"></canvas>
+
+  <!-- ===== Top bar ===== -->
+  <header class="topbar">
+    <a href="#top" class="brand">
+      <span class="brand-mark">J</span>
+      <span>Jelly <b>Water</b></span>
+    </a>
+    <nav class="nav">
+      <a href="#why">Why coconut water</a>
+      <a href="#promise">Our promise</a>
+      <a href="tel:+18764644762" class="nav-phone">📞 (876) 464-4762</a>
+      <a href="#order" class="nav-cta">Order now</a>
+    </nav>
+  </header>
+
+  <main id="top">
+    <!-- ===== Hero: huge headline on the left, the 3D bottle floats on the right ===== -->
+    <section class="hero" data-bottle="hero">
+      <div class="hero-copy">
+        <p class="eyebrow"><span class="flag"><i></i><i></i><i></i></span> Straight from the coconut · Jamaica</p>
+        <h1>
+          <span class="line">Ice cold.</span>
+          <span class="line">Pure <em>coconut.</em></span>
+          <span class="line">Nothing added.</span>
+        </h1>
+        <p class="lede">Jelly Water is 100% pure Jamaican coconut water, bottled cold so every sip tastes like you just cut the jelly yourself.</p>
+        <div class="hero-actions">
+          <a href="#order" class="button button-gold">Order a bottle</a>
+          <a href="tel:+18764644762" class="button button-ghost">Call (876) 464-4762</a>
+        </div>
+        <ul class="hero-stats">
+          <li><b>100%</b><span>coconut water</span></li>
+          <li><b>0 g</b><span>added sugar</span></li>
+          <li><b>600 mL</b><span>per bottle</span></li>
+        </ul>
+      </div>
+      <!-- Space the 3D bottle floats in: a glowing disc with a slowly turning ring of words behind it -->
+      <div class="bottle-stage " data-stage="hero" aria-hidden="true">
+        <span class="stage-disc"></span>
+        <svg class="stage-ring" viewBox="0 0 400 400">
+          <defs><path id="ring-hero" d="M200,200 m-170,0 a170,170 0 1,1 340,0 a170,170 0 1,1 -340,0"/></defs>
+          <text><textPath href="#ring-hero" textLength="1050" lengthAdjust="spacing">100% PURE COCONUT WATER • STRAIGHT FROM JAMAICA • NOTHING ADDED • </textPath></text>
+        </svg>
+      </div>
+      <p class="drag-hint">Drag the bottle to spin it ↻</p>
+    </section>
+
+    <!-- ===== Scrolling ticker band ===== -->
+    <div class="ticker" aria-hidden="true">
+      <div class="ticker-track">
+        <span>Fresh</span><span>✦</span><span>Natural</span><span>✦</span><span>Jamaican</span><span>✦</span>
+        <span>Ice cold</span><span>✦</span><span>No added sugar</span><span>✦</span><span>Straight from the coconut</span><span>✦</span>
+        <span>Fresh</span><span>✦</span><span>Natural</span><span>✦</span><span>Jamaican</span><span>✦</span>
+        <span>Ice cold</span><span>✦</span><span>No added sugar</span><span>✦</span><span>Straight from the coconut</span><span>✦</span>
+      </div>
+    </div>
+
+    <!-- ===== Benefits: same seven points as the back of the label ===== -->
+    <section class="why" id="why" data-bottle="why">
+      <!-- Space the 3D bottle floats in: a glowing disc with a slowly turning ring of words behind it -->
+      <div class="bottle-stage " data-stage="why" aria-hidden="true">
+        <span class="stage-disc"></span>
+        <svg class="stage-ring" viewBox="0 0 400 400">
+          <defs><path id="ring-why" d="M200,200 m-170,0 a170,170 0 1,1 340,0 a170,170 0 1,1 -340,0"/></defs>
+          <text><textPath href="#ring-why" textLength="1050" lengthAdjust="spacing">HYDRATING • ELECTROLYTES • POTASSIUM • NO ADDED SUGAR • FAT FREE • </textPath></text>
+        </svg>
+      </div>
+      <div class="why-copy">
+        <p class="eyebrow">The good stuff</p>
+        <h2>Why coconut <em>water?</em></h2>
+        <ul class="benefits">
+          <li class="reveal"><span class="tick">✓</span><div><b>Naturally hydrating</b><p>Quenches thirst better than plain water on a hot Jamaican day.</p></div></li>
+          <li class="reveal"><span class="tick">✓</span><div><b>Packed with electrolytes</b><p>Nature's own sports drink — no powders, no colouring.</p></div></li>
+          <li class="reveal"><span class="tick">✓</span><div><b>Rich in potassium</b><p>More potassium than a banana in every bottle.</p></div></li>
+          <li class="reveal"><span class="tick">✓</span><div><b>Low in calories</b><p>Light and refreshing, never heavy.</p></div></li>
+          <li class="reveal"><span class="tick">✓</span><div><b>No added sugar</b><p>Only the sweetness the coconut gives.</p></div></li>
+          <li class="reveal"><span class="tick">✓</span><div><b>Fat free</b><p>Clean, pure refreshment.</p></div></li>
+          <li class="reveal"><span class="tick">✓</span><div><b>Great after exercise</b><p>Top up what you sweat out at the gym or the field.</p></div></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ===== Our promise: the Nature Fresh statement from the label ===== -->
+    <section class="promise" id="promise" data-bottle="promise">
+      <div class="promise-inner reveal">
+        <p class="eyebrow eyebrow-light">Our promise</p>
+        <blockquote>
+          “At Nature Fresh, we believe in using <em>food as medicine</em> and <em>medicine as food.</em>
+          That is why we guarantee all our products are 100% natural.”
+        </blockquote>
+        <p class="promise-sign">— The Nature Fresh family</p>
+      </div>
+    <!-- Space the 3D bottle floats in: a glowing disc with a slowly turning ring of words behind it -->
+      <div class="bottle-stage stage-dark" data-stage="promise" aria-hidden="true">
+        <span class="stage-disc"></span>
+        <svg class="stage-ring" viewBox="0 0 400 400">
+          <defs><path id="ring-promise" d="M200,200 m-170,0 a170,170 0 1,1 340,0 a170,170 0 1,1 -340,0"/></defs>
+          <text><textPath href="#ring-promise" textLength="1050" lengthAdjust="spacing">FOOD AS MEDICINE • MEDICINE AS FOOD • 100% NATURAL • NATURE FRESH • </textPath></text>
+        </svg>
+      </div>
+    </section>
+
+    <!-- ===== Order: pick packs, fill details, send by WhatsApp ===== -->
+    <section class="order" id="order" data-bottle="order">
+      <div class="order-head reveal">
+        <p class="eyebrow">Order now</p>
+        <h2>Get it <em>ice cold</em> at your door.</h2>
+        <p class="lede">Choose your bottles, tell us where to bring them, and send the order straight to us on WhatsApp.</p>
+      </div>
+
+      <form class="order-form" id="order-form" novalidate>
+        <!-- Product cards are filled in by js/order.js from the PRODUCTS list -->
+        <fieldset class="products" id="products">
+          <legend class="step"><span>1</span> Choose your bottles</legend>
+        </fieldset>
+
+        <fieldset class="details">
+          <legend class="step"><span>2</span> Your details</legend>
+          <div class="field">
+            <label for="customer-name">Full name</label>
+            <input id="customer-name" name="name" autocomplete="name" placeholder="e.g. Andrea Brown">
+            <small class="error" data-error-for="customer-name"></small>
+          </div>
+          <div class="field">
+            <label for="customer-phone">Phone number</label>
+            <input id="customer-phone" name="phone" type="tel" autocomplete="tel" placeholder="876 000 0000">
+            <small class="error" data-error-for="customer-phone"></small>
+          </div>
+          <div class="field">
+            <label for="customer-parish">Parish</label>
+            <select id="customer-parish" name="parish">
+              <option value="">Choose your parish</option>
+            </select>
+            <small class="error" data-error-for="customer-parish"></small>
+          </div>
+          <div class="field field-wide">
+            <label for="customer-address">Delivery address</label>
+            <input id="customer-address" name="address" autocomplete="street-address" placeholder="House number, street, district">
+            <small class="error" data-error-for="customer-address"></small>
+          </div>
+          <div class="field field-wide">
+            <label for="customer-notes">Notes <span class="optional">(optional)</span></label>
+            <textarea id="customer-notes" name="notes" rows="2" placeholder="Gate colour, best time to deliver…"></textarea>
+          </div>
+        </fieldset>
+
+        <!-- Running total and the send button -->
+        <aside class="summary">
+          <legend class="step"><span>3</span> Send your order</legend>
+          <ul class="summary-lines" id="summary-lines"><li class="summary-empty">No bottles picked yet.</li></ul>
+          <div class="summary-total"><span>Total</span><b id="summary-total">J$0</b></div>
+          <small class="error" data-error-for="products"></small>
+          <button type="submit" class="button button-gold button-block">Send order on WhatsApp</button>
+          <a href="tel:+18764644762" class="button button-ghost-dark button-block">Or call (876) 464-4762</a>
+          <p class="summary-note">Payment on delivery. We confirm every order by WhatsApp or phone.</p>
+          <div class="order-sent" id="order-sent" hidden>
+            WhatsApp should now be open with your order typed in. <b>Press send</b> in WhatsApp so we receive it.
+          </div>
+        </aside>
+      </form>
+    </section>
+  </main>
+
+  <!-- ===== Footer ===== -->
+  <footer class="footer">
+    <div>
+      <p class="footer-brand">Jelly <b>Water</b></p>
+      <p>100% pure coconut water · Product of Jamaica</p>
+    </div>
+    <div>
+      <p class="footer-label">Contact us to order</p>
+      <a href="tel:+18764644762" class="footer-phone">(876) 464-4762</a>
+    </div>
+    <p class="footer-small">© 2026 Nature Fresh. Keep refrigerated (0–4 °C). Shake well.</p>
+  </footer>
+
+  <script type="module" src="js/bottle.js?v=3"></script>
+  <script src="js/order.js?v=3"></script>
+</body>
+</html>
