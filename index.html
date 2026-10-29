@@ -11,7 +11,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="css/site.css?v=3">
+  <link rel="stylesheet" href="css/site.css?v=4">
 
   <!-- Tells the browser where to load the Three.js 3D library from -->
   <script type="importmap">
@@ -176,13 +176,15 @@
         <aside class="summary">
           <legend class="step"><span>3</span> Send your order</legend>
           <ul class="summary-lines" id="summary-lines"><li class="summary-empty">No bottles picked yet.</li></ul>
-          <div class="summary-total"><span>Total</span><b id="summary-total">J$0</b></div>
+          <div class="summary-total"><span>Total</span><b id="summary-total" class="digit-group">J$0</b></div>
           <small class="error" data-error-for="products"></small>
           <button type="submit" class="button button-gold button-block">Send order on WhatsApp</button>
           <a href="tel:+18764644762" class="button button-ghost-dark button-block">Or call (876) 464-4762</a>
           <p class="summary-note">Payment on delivery. We confirm every order by WhatsApp or phone.</p>
           <div class="order-sent" id="order-sent" hidden>
-            WhatsApp should now be open with your order typed in. <b>Press send</b> in WhatsApp so we receive it.
+            <!-- green tick that draws itself when the order is sent -->
+            <svg class="sent-check" data-state="out" viewBox="0 0 34 34" aria-hidden="true"><circle cx="17" cy="17" r="17"/><path d="M10 17.5l4.6 4.6L24 12.6"/></svg>
+            <span>WhatsApp should now be open with your order typed in. <b>Press send</b> in WhatsApp so we receive it.</span>
           </div>
         </aside>
       </form>
@@ -202,7 +204,7 @@
     <p class="footer-small">© 2026 Nature Fresh. Keep refrigerated (0–4 °C). Shake well.</p>
   </footer>
 
-  <script type="module" src="js/bottle.js?v=3"></script>
-  <script src="js/order.js?v=3"></script>
+  <script type="module" src="js/bottle.js?v=4"></script>
+  <script src="js/order.js?v=4"></script>
 </body>
 </html>
