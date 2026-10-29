@@ -11,7 +11,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="css/site.css?v=4">
+  <link rel="stylesheet" href="css/site.css?v=5">
 
   <!-- Tells the browser where to load the Three.js 3D library from -->
   <script type="importmap">
@@ -46,9 +46,10 @@
     <section class="hero" data-bottle="hero">
       <div class="hero-copy">
         <p class="eyebrow"><span class="flag"><i></i><i></i><i></i></span> Straight from the coconut · Jamaica</p>
-        <h1>
+        <!-- the aria-label gives screen readers the full headline while the green word keeps changing -->
+        <h1 aria-label="Ice cold. Pure coconut. Nothing added.">
           <span class="line">Ice cold.</span>
-          <span class="line">Pure <em>coconut.</em></span>
+          <span class="line">Pure <em class="swap-word" aria-hidden="true">coconut.</em></span>
           <span class="line">Nothing added.</span>
         </h1>
         <p class="lede">Jelly Water is 100% pure Jamaican coconut water, bottled cold so every sip tastes like you just cut the jelly yourself.</p>
@@ -113,7 +114,7 @@
       <div class="promise-inner reveal">
         <p class="eyebrow eyebrow-light">Our promise</p>
         <blockquote>
-          “At Nature Fresh, we believe in using <em>food as medicine</em> and <em>medicine as food.</em>
+          “At Nature Fresh, we believe in using <em class="shine">food as medicine</em> and <em class="shine">medicine as food.</em>
           That is why we guarantee all our products are 100% natural.”
         </blockquote>
         <p class="promise-sign">— The Nature Fresh family</p>
@@ -204,7 +205,8 @@
     <p class="footer-small">© 2026 Nature Fresh. Keep refrigerated (0–4 °C). Shake well.</p>
   </footer>
 
-  <script type="module" src="js/bottle.js?v=4"></script>
-  <script src="js/order.js?v=4"></script>
+  <script type="module" src="js/bottle.js?v=5"></script>
+  <script src="js/order.js?v=5"></script>
+  <script src="js/text-motion.js?v=7"></script>
 </body>
 </html>

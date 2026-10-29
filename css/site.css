@@ -158,10 +158,7 @@ h2 { font-size: clamp(40px, 6vw, 84px); line-height: 0.95; }
 .hero { min-height: 100vh; display: grid; grid-template-columns: minmax(0, 52%) 1fr; align-items: center; padding-top: 120px; }
 .hero-copy { max-width: 900px; }
 .hero h1 { font-size: clamp(46px, 6.3vw, 124px); line-height: 0.92; }
-.hero h1 .line { display: block; animation: rise 1s var(--ease-smooth-out) both; }
-.hero h1 .line:nth-child(2) { animation-delay: 0.12s; }
-.hero h1 .line:nth-child(3) { animation-delay: 0.24s; }
-@keyframes rise { from { opacity: 0; transform: translateY(40px); filter: blur(var(--reveal-blur)); } to { opacity: 1; transform: none; filter: blur(0); } }
+.hero h1 .line { display: block; }
 .hero .lede { margin: 26px 0 32px; }
 .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; }
 .hero-stats { list-style: none; display: flex; gap: 34px; padding: 0; margin: 44px 0 0; }
@@ -386,6 +383,47 @@ fieldset, .summary { margin: 0; border: 0; padding: 26px; border-radius: var(--r
 }
 .product.is-hover .tilt-glare { opacity: var(--tilt-glare-opacity); }
 
+/* ---------- Moving text (js/text-motion.js, recipes from transitions.dev) ---------- */
+
+/* Words rise in one after another out of a blur ("texts reveal") */
+.words .word {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(0.35em);
+  filter: blur(var(--reveal-blur));
+  transition:
+    opacity 700ms var(--ease-smooth-out),
+    transform 700ms var(--ease-smooth-out),
+    filter 700ms var(--ease-smooth-out);
+  transition-delay: calc(var(--word-order, 0) * 70ms);
+}
+.words.words-in .word { opacity: 1; transform: none; filter: blur(0); }
+
+/* The promise quote "writes itself": no movement, each word just clears from a blur ("streaming text") */
+.words-stream .word { transform: none; filter: blur(2px); transition-duration: 450ms; transition-delay: calc(var(--word-order, 0) * 60ms); }
+
+/* The green word in the hero that keeps changing ("text states swap") */
+.swap-word {
+  display: inline-block;
+  transition: opacity 260ms ease-in-out, transform 260ms ease-in-out, filter 260ms ease-in-out;
+}
+.swap-word.is-leaving { opacity: 0; transform: translateY(-0.25em); filter: blur(4px); }
+.swap-word.is-entering { opacity: 0; transform: translateY(0.25em); filter: blur(4px); transition: none; }
+/* it rises in with the rest of the headline; "backwards" so it lets go afterwards and the swaps can run */
+.hero h1.words .swap-word { animation: swap-word-in 700ms var(--ease-smooth-out) 140ms backwards; }
+@keyframes swap-word-in { from { opacity: 0; transform: translateY(0.35em); filter: blur(var(--reveal-blur)); } }
+
+/* A soft light sweeps across the gold words of the promise ("shimmer text") */
+.promise blockquote em.shine .word {
+  background: linear-gradient(100deg, var(--gold) 0%, var(--gold) 40%, #fff6c4 50%, var(--gold) 60%, var(--gold) 100%);
+  background-size: 300% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: shine 4.5s linear infinite;
+}
+@keyframes shine { from { background-position: 100% 0; } to { background-position: 0% 0; } }
+
 /* ---------- Phones and small tablets ---------- */
 @media (max-width: 1100px) {
   .nav .nav-phone { display: none; }
@@ -424,5 +462,6 @@ fieldset, .summary { margin: 0; border: 0; padding: 26px; border-radius: var(--r
   .sent-check path { stroke-dashoffset: 0 !important; }
   .sent-check { opacity: 1; }
   .tilt-card { transform: none !important; transition: none !important; }
+  .promise blockquote em.shine .word { animation: none; }
   html { scroll-behavior: auto; }
 }
