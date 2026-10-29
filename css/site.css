@@ -60,6 +60,9 @@ body {
 img { max-width: 100%; display: block; }
 a { color: inherit; }
 em { font-style: normal; color: var(--green); }
+/* the tilted ticker band is meant to run off both edges; clip it there so phones don't zoom out.
+   "clip", not "hidden": hidden would stop the sticky bottle stage and order summary from sticking */
+main { overflow-x: clip; }
 
 /* ---------- The 3D canvas: fixed over the page, but clicks pass through it ---------- */
 #bottle-canvas {
@@ -183,7 +186,9 @@ h2 { font-size: clamp(40px, 6vw, 84px); line-height: 0.95; }
   box-shadow: 0 0 120px 10px rgba(67, 192, 179, 0.18);
   animation: breathe 6s ease-in-out infinite;
 }
-.stage-ring { position: absolute; width: min(100%, 84vh); aspect-ratio: 1; animation: turn 40s linear infinite; }
+/* the words turn inside the ring, not the whole square: a turning square's corners poke past the screen edge and make phones zoom out */
+.stage-ring { position: absolute; width: min(100%, 84vh); aspect-ratio: 1; }
+.stage-ring text { transform-origin: 200px 200px; animation: turn 40s linear infinite; }
 .stage-ring text { font: 800 19px var(--body); fill: #0a7a70; opacity: 0.6; }   /* textLength in the HTML spaces the words evenly round the circle */
 /* in the long "why" section the stage stays pinned in the middle of the screen, so it lines up with the floating bottle */
 .why .bottle-stage { position: sticky; top: calc(50vh - min(39vh, 380px)); align-self: start; }
@@ -240,7 +245,8 @@ h2 { font-size: clamp(40px, 6vw, 84px); line-height: 0.95; }
   gap: 22px;
   align-items: start;
 }
-fieldset, .summary { margin: 0; border: 0; padding: 26px; border-radius: var(--radius); background: var(--white); box-shadow: 0 10px 40px rgba(4, 68, 31, 0.08); }
+/* min-width: 0 — fieldsets refuse to shrink below their content by default, which pushed phones 6px too wide */
+fieldset, .summary { min-width: 0; margin: 0; border: 0; padding: 26px; border-radius: var(--radius); background: var(--white); box-shadow: 0 10px 40px rgba(4, 68, 31, 0.08); }
 .products { grid-area: products; display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
 .details { grid-area: details; display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
 .summary { grid-area: summary; position: sticky; top: 100px; display: grid; gap: 14px; }
@@ -279,13 +285,14 @@ fieldset, .summary { margin: 0; border: 0; padding: 26px; border-radius: var(--r
 .stepper output { font-weight: 800; min-width: 2ch; text-align: center; }
 
 /* Form fields */
-.field { display: flex; flex-direction: column; gap: 6px; }
+.field { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
 .field-wide { grid-column: 1 / -1; }
 .field label { font-size: 14px; font-weight: 600; color: var(--green-ink); }
 .optional { font-weight: 400; color: var(--muted); }
 .field input, .field select, .field textarea {
   font: 500 15px var(--body); color: var(--ink);
   padding: 13px 14px; border-radius: 12px; border: 2px solid #dfe8dc; background: var(--cream);
+  width: 100%; min-width: 0;   /* boxes fill their column and never poke out of the card on phones */
   transition: border-color 0.2s ease, background 0.2s ease;
 }
 .field input:focus, .field select:focus, .field textarea:focus { outline: none; border-color: var(--green); background: var(--white); }
@@ -437,7 +444,7 @@ fieldset, .summary { margin: 0; border: 0; padding: 26px; border-radius: var(--r
   section { padding: 96px var(--gutter); }
   /* on phones the bottle floats in the empty space above the headline */
   .hero { grid-template-columns: 1fr; padding-top: 84px; min-height: 0; }
-  .hero .bottle-stage { order: -1; height: 46vh; }
+  .hero .bottle-stage { order: -1; height: 58vh; }   /* tall enough for the bigger phone bottle */
   .why, .promise { grid-template-columns: 1fr; }
   .why .bottle-stage, .promise .bottle-stage { display: none; }
   .hero-copy, .why-copy, .promise-inner { max-width: 100%; width: 100%; }
@@ -457,7 +464,7 @@ fieldset, .summary { margin: 0; border: 0; padding: 26px; border-radius: var(--r
 
 /* Respect people who turn off motion in their phone/computer settings */
 @media (prefers-reduced-motion: reduce) {
-  .ticker-track, .hero h1 .line, .stage-ring, .stage-disc { animation: none; }
+  .ticker-track, .hero h1 .line, .stage-ring text, .stage-disc { animation: none; }
   .reveal { opacity: 1; transform: none; filter: none; transition: none; }
   .digit-group .digit, .is-shaking, .sent-check, .sent-check path { animation: none !important; }
   .sent-check path { stroke-dashoffset: 0 !important; }

@@ -26,7 +26,7 @@ const DESKTOP_POSES = {
   order: { x: 0.8, y: 0.1, scale: 0.7, opacity: 0 },
 };
 const PHONE_POSES = {
-  hero: { x: 0.0, y: 0.36, scale: 0.5, opacity: 1 },
+  hero: { x: 0.0, y: 0.36, scale: 0.7, opacity: 1 },   // big on phones; y is replaced by the middle of its stage
   why: { x: 0.6, y: -0.6, scale: 0.5, opacity: 0 },
   promise: { x: 0.6, y: -0.6, scale: 0.5, opacity: 0 },
   order: { x: 0.6, y: -0.6, scale: 0.5, opacity: 0 },
@@ -373,11 +373,20 @@ function stageX(sectionKey) {
   return ((box.left + box.width / 2) / window.innerWidth) * 2 - 1;
 }
 
-/** A section's pose, with x moved to sit right in the middle of its stage. */
+/** Finds the middle of a section's stage up the screen (−1 bottom … 1 top). */
+function stageY(sectionKey) {
+  const box = document.querySelector(`[data-stage="${sectionKey}"]`)?.getBoundingClientRect();
+  if (!box || box.height === 0) return null;
+  return 1 - ((box.top + box.height / 2) / window.innerHeight) * 2;
+}
+
+/** A section's pose, moved to sit right in the middle of its stage (on phones, up/down too). */
 function poseFor(section, poses) {
   const key = section.dataset.bottle;
   const x = stageX(key);
-  return x === null ? poses[key] : { ...poses[key], x };
+  if (x === null) return poses[key];
+  const y = isPhone() ? stageY(key) : null;
+  return y === null ? { ...poses[key], x } : { ...poses[key], x, y };
 }
 
 /** Works out where the bottle should be, based on which section is in the middle of the screen. */
